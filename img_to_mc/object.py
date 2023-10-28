@@ -52,7 +52,7 @@ class itm_Image():
         FormatImage = DefaultImage.resize(( round(image_resolution/100 * default_largeur), round(image_resolution/100 * default_hauteur) ))
         format_largeur, format_hauteur = FormatImage.size
 
-        DefaultImage.save('debug.png')
+        #DefaultImage.save('debug.png')
 
         Content_file = f'# {_files_credits}\n'
         for x in range(format_largeur):
@@ -80,7 +80,6 @@ class itm_Image():
 class itm_ImgMinecraft():
 
     def __init__(self, file_content) -> None:
-
         self.content = file_content
 
     def save(self, file_path:str):
