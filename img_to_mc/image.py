@@ -1,4 +1,4 @@
-from PIL import Image as PilImage, PngImagePlugin
+from PIL import Image as PilImage
 
 from .object import itm_Image
 

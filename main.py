@@ -3,7 +3,7 @@ from img_to_mc import image as itmImage
 image = itmImage.load_file('test_image/image2.jpg')
 
 debug_info = False
-image_formate = image.Convert(3, 3, 'normal', 100, 0.8, Print_progress_info=debug_info)
+image_formate = image.Convert(2, 3.5, 'normal', 60, 0.8, Print_progress_info=debug_info)
 
 print(image_formate.get_content())
 

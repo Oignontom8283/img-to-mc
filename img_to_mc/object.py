@@ -32,6 +32,8 @@ class itm_Image():
             particle_axe_Y: Union[int, float] = 0.05,
             particle_axe_Z: Union[int, float] = 0.05,
             particle_visibility_selector: str = '@a',
+            particle_id: str = 'minecraft:dust', # Identify the particle to use for display
+            particle_command: str = 'particle', # Minecraft command to display particles
             Print_progress_info: bool = False
             ):
 
@@ -70,7 +72,7 @@ class itm_Image():
                     pixY = -map_value(y, format_hauteur, image_hauteur) + image_hauteur
 
                     # append value to content
-                    Content_file = Content_file + f'{_config.command_DisplayParticle} {_config.id_ParticleDisplay} {red} {green} {blue} {particle_size} ^ ^{pixY} ^{pixX} {particle_axe_X} {particle_axe_Y} {particle_axe_Z} {particle_speed} {particle_count} {particle_mod} {particle_visibility_selector}\n'
+                    Content_file = Content_file + f'{particle_command} {particle_id} {red} {green} {blue} {particle_size} ^ ^{pixY} ^{pixX} {particle_axe_X} {particle_axe_Y} {particle_axe_Z} {particle_speed} {particle_count} {particle_mod} {particle_visibility_selector}\n'
 
                     if Print_progress_info == True: print(f"Coordonnées : ({x}, {y}), Couleur : {color}")
 
