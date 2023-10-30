@@ -31,58 +31,66 @@ class itm_Image():
             particle_visibility_selector: str = '@a',
             particle_id: str = 'minecraft:dust', # Identify the particle to use for display
             particle_command: str = 'particle', # Minecraft command to display particles
-            Print_progress_info: bool = False,
             progress_connect: Callable = None,
-            finish_connect: Callable = None
+            finish_connect: Callable = None,
+            error_connect: Callable = None
             ):
-
-        def map_value(
-                valeur_initiale,
-                plage_max,
-                nouvelle_max,
-                plage_min = 0,
-                nouvelle_min = 0,
-            ):
-            valeur_convertie = (valeur_initiale - plage_min) * (nouvelle_max - nouvelle_min) / (plage_max - plage_min) + nouvelle_min
-            return valeur_convertie
         
-        DefaultImage:PilImage.Image = self.image
+        try:
 
-        default_largeur, default_hauteur = DefaultImage.size
+            def map_value(
+                    valeur_initiale,
+                    plage_max,
+                    nouvelle_max,
+                    plage_min = 0,
+                    nouvelle_min = 0,
+                ):
+                valeur_convertie = (valeur_initiale - plage_min) * (nouvelle_max - nouvelle_min) / (plage_max - plage_min) + nouvelle_min
+                return valeur_convertie
+            
+            DefaultImage:PilImage.Image = self.image
 
-        # init Image after resizeing
-        FormatImage = DefaultImage.resize(( round(image_resolution/100 * default_largeur), round(image_resolution/100 * default_hauteur) )) # resize the image to the resolution indicated
-        format_largeur, format_hauteur = FormatImage.size
-        format_number_pixels = format_largeur * format_hauteur
+            default_largeur, default_hauteur = DefaultImage.size
 
-        #DefaultImage.save('../debug.png')
+            # init Image after resizeing
+            FormatImage = DefaultImage.resize(( round(image_resolution/100 * default_largeur), round(image_resolution/100 * default_hauteur) )) # resize the image to the resolution indicated
+            format_largeur, format_hauteur = FormatImage.size
+            format_number_pixels = format_largeur * format_hauteur
 
-        Content_file = f'# {_files_credits}\n'
-        Progress_counte = 0
-        for x in range(format_largeur):
-            for y in range(format_hauteur):
+            #DefaultImage.save('../debug.png')
 
-                color = FormatImage.getpixel((x, y))
+            Content_file = f'# {_files_credits}\n'
+            Progress_counte = 0
+            for x in range(format_largeur):
+                for y in range(format_hauteur):
 
-                if color[3] != 0:
-                    
-                    red = color[0]   / 255
-                    green = color[1] / 255
-                    blue = color[2]  / 255
+                    color = FormatImage.getpixel((x, y))
 
-                    pixX = map_value(x, format_largeur, image_largeur)
-                    pixY = -map_value(y, format_hauteur, image_hauteur) + image_hauteur
+                    if color[3] != 0:
+                        
+                        red = color[0]   / 255
+                        green = color[1] / 255
+                        blue = color[2]  / 255
 
-                    # append value to content
-                    Content_file = Content_file + f'{particle_command} {particle_id} {red} {green} {blue} {particle_size} ^ ^{pixY} ^{pixX} {particle_axe_X} {particle_axe_Y} {particle_axe_Z} {particle_speed} {particle_count} {particle_mod} {particle_visibility_selector}\n'
+                        pixX = map_value(x, format_largeur, image_largeur)
+                        pixY = -map_value(y, format_hauteur, image_hauteur) + image_hauteur
 
-                    Progress_counte = Progress_counte + 1
-                    if Print_progress_info == True: print(f"Coordonnées : ({x}, {y}), Couleur : {color}, Progress : {Progress_counte}/{format_number_pixels}")
+                        # append value to content
+                        Content_file = Content_file + f'{particle_command} {particle_id} {red} {green} {blue} {particle_size} ^ ^{pixY} ^{pixX} {particle_axe_X} {particle_axe_Y} {particle_axe_Z} {particle_speed} {particle_count} {particle_mod} {particle_visibility_selector}\n'
 
-                    if progress_connect != None: progress_connect(x, y, color, Progress_counte, format_number_pixels)
+                        Progress_counte = Progress_counte + 1
+                        if progress_connect != None: progress_connect(x, y, color, Progress_counte, format_number_pixels)
 
-        Content_file = Content_file + f'# {_files_credits}\n'
-        return itm_ImgMinecraft(Content_file)
+            Content_file = Content_file + f'# {_files_credits}\n'
+
+            if finish_connect != None: finish_connect(format_number_pixels)
+            return itm_ImgMinecraft(Content_file)
+    
+        except Exception as e: # s'il y a une exception vérifier si la fonction erreur est définie si oui exécuter la fonction avec l'erreur en paramètre et arrêter le programme sinon déclencher une erreur
+            if error_connect != None:
+                error_connect(e)
+            else:
+                raise SystemError(e)
 
 class itm_ImgMinecraft():
 

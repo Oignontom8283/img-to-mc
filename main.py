@@ -5,8 +5,10 @@ image = itmImage.load_file('test_image/image2.jpg')
 def Convert_progress(x, y, color, progress, nomber_pixls):
     print(f'x:{str(x):4} y:{str(y):4} ; {str(color):20} ; {progress}/{str(nomber_pixls):5} = {progress/nomber_pixls*100}%')
 
-debug_info = False
-image_formate = image.Convert(2, 3.5, 'normal', 60, 0.8, Print_progress_info=debug_info, progress_connect=Convert_progress)
+def Convert_finish(number_pixels):
+    print(f"programme finish | Total pixels : {number_pixels}")
+
+image_formate = image.Convert(2, 3.5, 'normal', 50, 0.8, progress_connect=Convert_progress, finish_connect=Convert_finish)
 
 # print(image_formate.get_content())
 
