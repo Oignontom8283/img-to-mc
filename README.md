@@ -20,7 +20,7 @@
 | Step              | Statue           |
 |-------------------|------------------|
 | Prototy           | Finish           |
-| Backend           | Finish           |
+| Backend           | Finish 98%       |
 | GUI               | Not started      |
 | Use command line  | Not started      |
 | Vidéo ?           | Food for thought |
