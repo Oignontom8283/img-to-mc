@@ -2,10 +2,13 @@ from img_to_mc import image as itmImage
 
 image = itmImage.load_file('test_image/image2.jpg')
 
-debug_info = False
-image_formate = image.Convert(2, 3.5, 'normal', 60, 0.8, Print_progress_info=debug_info)
+def Convert_progress(x, y, color, progress, nomber_pixls):
+    print(f'x:{str(x):4} y:{str(y):4} ; {str(color):20} ; {progress}/{str(nomber_pixls):5} = {progress/nomber_pixls*100}%')
 
-print(image_formate.get_content())
+debug_info = False
+image_formate = image.Convert(2, 3.5, 'normal', 60, 0.8, Print_progress_info=debug_info, progress_connect=Convert_progress)
+
+# print(image_formate.get_content())
 
 print(image_formate.save('function.mcfunction'))
 

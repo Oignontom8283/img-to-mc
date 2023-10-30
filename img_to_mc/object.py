@@ -1,7 +1,5 @@
-from typing import Union
+from typing import Union, Callable
 from typing_extensions import Literal
-
-from . import _config
 
 from PIL import Image as PilImage
 
@@ -13,7 +11,6 @@ class itm_Image():
         
         try:
             image_format = image.convert("RGBA")
-            print(f'type : {type(image_format)}')
 
             self.image = image_format
 
@@ -34,7 +31,9 @@ class itm_Image():
             particle_visibility_selector: str = '@a',
             particle_id: str = 'minecraft:dust', # Identify the particle to use for display
             particle_command: str = 'particle', # Minecraft command to display particles
-            Print_progress_info: bool = False
+            Print_progress_info: bool = False,
+            progress_connect: Callable = None,
+            finish_connect: Callable = None
             ):
 
         def map_value(
@@ -51,12 +50,15 @@ class itm_Image():
 
         default_largeur, default_hauteur = DefaultImage.size
 
-        FormatImage = DefaultImage.resize(( round(image_resolution/100 * default_largeur), round(image_resolution/100 * default_hauteur) ))
+        # init Image after resizeing
+        FormatImage = DefaultImage.resize(( round(image_resolution/100 * default_largeur), round(image_resolution/100 * default_hauteur) )) # resize the image to the resolution indicated
         format_largeur, format_hauteur = FormatImage.size
+        format_number_pixels = format_largeur * format_hauteur
 
         #DefaultImage.save('debug.png')
 
         Content_file = f'# {_files_credits}\n'
+        Progress_counte = 0
         for x in range(format_largeur):
             for y in range(format_hauteur):
 
@@ -74,7 +76,10 @@ class itm_Image():
                     # append value to content
                     Content_file = Content_file + f'{particle_command} {particle_id} {red} {green} {blue} {particle_size} ^ ^{pixY} ^{pixX} {particle_axe_X} {particle_axe_Y} {particle_axe_Z} {particle_speed} {particle_count} {particle_mod} {particle_visibility_selector}\n'
 
-                    if Print_progress_info == True: print(f"Coordonnées : ({x}, {y}), Couleur : {color}")
+                    Progress_counte = Progress_counte + 1
+                    if Print_progress_info == True: print(f"Coordonnées : ({x}, {y}), Couleur : {color}, Progress : {Progress_counte}/{format_number_pixels}")
+
+                    if progress_connect != None: progress_connect(x, y, color, Progress_counte, format_number_pixels)
 
         Content_file = Content_file + f'# {_files_credits}\n'
         return itm_ImgMinecraft(Content_file)
