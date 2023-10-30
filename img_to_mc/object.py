@@ -55,7 +55,7 @@ class itm_Image():
         format_largeur, format_hauteur = FormatImage.size
         format_number_pixels = format_largeur * format_hauteur
 
-        #DefaultImage.save('debug.png')
+        #DefaultImage.save('../debug.png')
 
         Content_file = f'# {_files_credits}\n'
         Progress_counte = 0
