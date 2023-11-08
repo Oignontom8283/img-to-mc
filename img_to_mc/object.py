@@ -18,8 +18,8 @@ class itm_Image():
             raise TypeError(f'File is not conpatible | Error : {e}')
 
     def Convert(self,
-            image_largeur: Union[int, float],
-            image_hauteur: Union[int, float],
+            image_width: Union[int, float],
+            image_height: Union[int, float],
             particle_mod: Literal['force', 'normal'],
             image_resolution: Union[int, float] = 50.0,
             particle_size: Union[int, float] = 1.0,
@@ -36,6 +36,42 @@ class itm_Image():
             error_connect: Callable = None
             ):
         
+        """
+        ## Utility
+        This function aims to convert the loaded image into an image made of minecraft particles
+
+        ## Setting
+        Info on the main parameters of the function
+
+        | Setting                        | Usefulness                                                                                                                        |
+        |--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+        | `image_width`                  | In-game image width (in block)                                                                                                    |
+        | `image_height`                 | In-game image image_height (in block)                                                                                             |
+        | `particle_mod`                 | Particle display mode (display distance). 'force' or 'normal'                                                                     |
+        | `image_resolution`             | Percentage of original image resolution/quality. (Use it to optimize gaming performance)                                          |
+        | `progress_connect`             | Give a function to this parameter, the given function will be executed throughout the image processing. (See example below)       |
+        | `finish_connect`               | Donnez une fonction à ce paramètre, la fonction donnée sera exécutée à la fin du traitement de l'image. (Voir exemple ci-dessous) |
+        | `error_connect`                | Donnez une fonction à ce paramètre, la fonction donnée sera exécutée s'il y a une erreur. (Voir exemple ci-dessous)               |
+        | `particle_size`                | Particle size in the game                                                                                                         |
+        | `particle_speed`               | Particle speed in the game (do not modify to have stable particles)                                                               |
+        | `particle_count`               | Number of particles per pixel (Use it to optimize gaming performance)                                                             |
+        | `particle_visibility_selector` | Minecraft selector that defines who can see particles [Selector Wiki](https://minecraft.fandom.com/wiki/Target_selectors)         |
+
+        ## Connect example
+
+        progress_connect
+        ```
+        def Convert_progress(x, y, color, progress, nomber_pixls)
+            print('x:', x)
+            print('y:', y)
+            print('color:', color)
+            print('progress:', progress)
+            print('nomber_pixls:', nomber_pixls)
+        ```
+
+
+        """
+
         try:
 
             def map_value(
@@ -72,8 +108,8 @@ class itm_Image():
                         green = color[1] / 255
                         blue = color[2]  / 255
 
-                        pixX = map_value(x, format_largeur, image_largeur)
-                        pixY = -map_value(y, format_hauteur, image_hauteur) + image_hauteur
+                        pixX = map_value(x, format_largeur, image_width)
+                        pixY = -map_value(y, format_hauteur, image_height) + image_height
 
                         # append value to content
                         Content_file = Content_file + f'{particle_command} {particle_id} {red} {green} {blue} {particle_size} ^ ^{pixY} ^{pixX} {particle_axe_X} {particle_axe_Y} {particle_axe_Z} {particle_speed} {particle_count} {particle_mod} {particle_visibility_selector}\n'
@@ -84,6 +120,7 @@ class itm_Image():
             Content_file = Content_file + f'# {_files_credits}\n'
 
             if finish_connect != None: finish_connect(format_number_pixels)
+
             return itm_ImgMinecraft(Content_file)
     
         except Exception as e: # s'il y a une exception vérifier si la fonction erreur est définie si oui exécuter la fonction avec l'erreur en paramètre et arrêter le programme sinon déclencher une erreur
