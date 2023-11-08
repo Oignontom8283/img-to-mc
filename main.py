@@ -3,19 +3,19 @@ from img_to_mc import image as itmImage
 image = itmImage.load_file('test_image/image2.jpg')
 
 def Convert_progress(x, y, color, progress, nomber_pixls):
-    print(f'x:{str(x):4} y:{str(y):4} ; {str(color):20} ; {progress}/{str(nomber_pixls):5} = {progress/nomber_pixls*100}%')
+    print(f'x:{str(x):4} y:{str(y):4} | {str(color):20} | {progress}/{str(nomber_pixls):5} = {progress/nomber_pixls*100} %')
 
 def Convert_finish(number_pixels):
     print(f"programme finish | Total pixels : {number_pixels}")
 
-image_formate = image.Convert(2, 3.5, 'normal', 50, 0.8, progress_connect=Convert_progress, finish_connect=Convert_finish)
+def Convert_error(e):
+    print(f'ERROR : {e}')
+
+image_formate = image.Convert(2, 3.5, 'normal', 50, 0.8, progress_connect=Convert_progress, finish_connect=Convert_finish, error_connect=Convert_error)
 
 # print(image_formate.get_content())
 
 print(image_formate.save('function.mcfunction'))
-
-
-
 
 
 

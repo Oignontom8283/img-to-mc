@@ -24,3 +24,14 @@
 | GUI               | Not started      |
 | Use command line  | Not started      |
 | Vidéo ?           | Food for thought |
+
+*************************************
+
+### Addiction packages
+
+| Packages                                                            | Version |
+|---------------------------------------------------------------------|---------|
+| Pillow [ⓘ](https://pypi.org/project/Pillow/)                       | 8.4.0   |
+| PyQt5 [ⓘ](https://pypi.org/project/PyQt5/)                         | 5.15.6  |
+| typing [ⓘ](https://pypi.org/project/typing/)                       | 3.7.4.3 |
+| typing_extensions [ⓘ](https://pypi.org/project/typing-extensions/) | 4.1.1   |
