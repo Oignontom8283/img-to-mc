@@ -56,20 +56,6 @@ class itm_Image():
         | `particle_speed`               | Particle speed in the game (do not modify to have stable particles)                                                               |
         | `particle_count`               | Number of particles per pixel (Use it to optimize gaming performance)                                                             |
         | `particle_visibility_selector` | Minecraft selector that defines who can see particles [Selector Wiki](https://minecraft.fandom.com/wiki/Target_selectors)         |
-
-        ## Connect example
-
-        progress_connect
-        ```
-        def Convert_progress(x, y, color, progress, nomber_pixls)
-            print('x:', x)
-            print('y:', y)
-            print('color:', color)
-            print('progress:', progress)
-            print('nomber_pixls:', nomber_pixls)
-        ```
-
-
         """
 
         try:

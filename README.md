@@ -27,7 +27,9 @@
 
 *************************************
 
-### Addiction packages
+### Addiction
+
+> The project requires [Python 3.6.3](https://www.python.org/downloads/release/python-363/) !
 
 | Packages                                                            | Version |
 |---------------------------------------------------------------------|---------|

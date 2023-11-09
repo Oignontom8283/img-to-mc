@@ -35,10 +35,6 @@ print(image_formate.save('function.mcfunction'))
 
 
 
-
-
-
-
 # import sys
 # from PyQt5.QtWidgets import QApplication, QFileDialog
 
