@@ -12,4 +12,4 @@ parser.add_argument('--image_width', type=int, help='In-game image width (in blo
 # Get the arguments
 args = parser.parse_args()
 
-print(args.image_width)
+print(args)
