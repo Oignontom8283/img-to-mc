@@ -33,7 +33,7 @@ for setting_name, settings in convert_param_list:
         script_settings.append([name, type, default])
 
 # add others parameter
-script_settings.append(['gui', bool, None]) 
+script_settings.append(['--gui', bool, None]) 
 
 
 # Define command ligne options
