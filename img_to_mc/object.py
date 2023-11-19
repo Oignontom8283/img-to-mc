@@ -37,25 +37,20 @@ class itm_Image():
             ):
         
         """
-        ## Utility
-        This function aims to convert the loaded image into an image made of minecraft particles
+        #### This function aims to convert the loaded image into an image made of minecraft particles
 
-        ## Setting
-        Info on the main parameters of the function
-
-        | Setting                        | Usefulness                                                                                                                        |
-        |--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-        | `image_width`                  | In-game image width (in block)                                                                                                    |
-        | `image_height`                 | In-game image image_height (in block)                                                                                             |
-        | `particle_mod`                 | Particle display mode (display distance). 'force' or 'normal'                                                                     |
-        | `image_resolution`             | Percentage of original image resolution/quality. (Use it to optimize gaming performance)                                          |
-        | `progress_connect`             | Give a function to this parameter, the given function will be executed throughout the image processing. (See example below)       |
-        | `finish_connect`               | Donnez une fonction à ce paramètre, la fonction donnée sera exécutée à la fin du traitement de l'image. (Voir exemple ci-dessous) |
-        | `error_connect`                | Donnez une fonction à ce paramètre, la fonction donnée sera exécutée s'il y a une erreur. (Voir exemple ci-dessous)               |
-        | `particle_size`                | Particle size in the game                                                                                                         |
-        | `particle_speed`               | Particle speed in the game (do not modify to have stable particles)                                                               |
-        | `particle_count`               | Number of particles per pixel (Use it to optimize gaming performance)                                                             |
-        | `particle_visibility_selector` | Minecraft selector that defines who can see particles [Selector Wiki](https://minecraft.fandom.com/wiki/Target_selectors)         |
+        Keyword Arguments:
+            - `image_width` → In-game image width (in block).
+            - `image_height` → In-game image image_height (in block).
+            - `particle_mod` → Particle display mode (display distance). 'force' or 'normal'.
+            - `image_resolution` → Percentage of original image resolution/quality. (Use it to optimize gaming performance).
+            - `progress_connect` → Give a function to this parameter, the given function will be executed throughout the image processing. (See example below).
+            - `finish_connect` → Donnez une fonction à ce paramètre, la fonction donnée sera exécutée à la fin du traitement de l'image. (Voir exemple ci-dessous).
+            - `error_connect` → Donnez une fonction à ce paramètre, la fonction donnée sera exécutée s'il y a une erreur. (Voir exemple ci-dessous).
+            - `particle_size` → Particle size in the game.
+            - `particle_speed` → Particle speed in the game (do not modify to have stable particles).
+            - `particle_count` → Number of particles per pixel (Use it to optimize gaming performance).
+            - `particle_visibility_selector` → Minecraft selector that defines who can see particles [Selector Wiki](https://minecraft.fandom.com/wiki/Target_selectors).
         """
 
         try:
