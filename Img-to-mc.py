@@ -3,6 +3,10 @@ import argparse, inspect
 from img_to_mc import image, object
 
 
+
+program_description = ""
+
+
 #  =====================================
 #     Handling command line arguments   
 #  =====================================
