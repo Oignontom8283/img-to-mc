@@ -1,4 +1,6 @@
 import argparse, inspect
+from typing import Union, Callable
+from typing_extensions import Literal
 
 from img_to_mc import image, object
 
@@ -51,14 +53,14 @@ for key, setting in script_settings.items():
 
 
 #  ======================
-#       Test section   
+#       Test section    
 #  ======================
 
 
 args = parser.parse_args()
 args = args._get_kwargs()
 
-print(script_settings)
+print(f'script_settings : {script_settings}')
 print()
 
 # Traiter les argument
@@ -67,11 +69,11 @@ for param_name, value in args:
     default_value = script_settings[param_name][1]
     param_type = script_settings[param_name][0]
 
-    print()
-    print(f'Value : {value}')
-    print(f'param_name : {param_name}')
-    print(f'default_value : {type(default_value)}')
-    print(f'param_type : {param_type}')
+    # print()
+    # print(f'Value : {value}')
+    # print(f'param_name : {param_name}')
+    # print(f'default_value : {type(default_value)}')
+    # print(f'param_type : {param_type}')
 
     if default_value == inspect._empty and value == None:
         raise ValueError(f"The argument '{param_name}' is mandatory")
@@ -88,6 +90,7 @@ for param_name, value in args:
 
     convert_args[param_name] = new_value
 
+print(f'convert_args : {convert_args}')
 
 # print('')
 # print(f'Default arguments : {script_settings}')
