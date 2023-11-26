@@ -62,6 +62,7 @@ args = args._get_kwargs()
 
 print(f'script_settings : {script_settings}')
 print()
+print(f'args : {args}')
 
 # Traiter les argument
 convert_args = {}
@@ -78,15 +79,45 @@ for param_name, value in args:
     if default_value == inspect._empty and value == None:
         raise ValueError(f"The argument '{param_name}' is mandatory")
 
+    # Si il y a pas de valeur méttre celle par default
     if value == None and default_value != None:
         new_value = default_value
     else:
         new_value = value
 
-    try:
-        new_value = param_type(new_value)
-    except:
-        raise SyntaxError(f"The value '{new_value}' of argument '{param_name}' is not type '{param_type}'")
+
+    # Gérer le cas des types Union
+    if hasattr(param_type, "__origin__") and param_type.__origin__ is Union:
+        # Essayer chaque type de l'Union jusqu'à trouver celui qui convient
+        union_types = param_type.__args__
+        converted = False
+        for union_type in union_types:
+            try:
+                new_value = union_type(new_value)
+                converted = True
+                break
+            except (ValueError, TypeError):
+                pass
+        if not converted:
+            raise SyntaxError(f"The value '{type(new_value)}' of argument '{param_name}' does not match any type in the Union")
+
+    # Gérer le cas des types littéraux
+    elif hasattr(param_type, "__origin__") and param_type.__origin__ is Literal:
+        # Vérifier que la valeur fait partie des littéraux autorisés
+        allowed_literals = param_type.__args__
+        if new_value not in allowed_literals:
+            # Si la valeur n'est pas une des valeurs autorisées, lever une erreur
+            raise SyntaxError(f"The value '{new_value}' of argument '{param_name}' is not a valid literal. Allowed literals are {allowed_literals}")
+        else:
+            # Si la valeur est un littéral valide, pas besoin de conversion
+            pass
+
+    # Gérer les autres types
+    else:
+        try:
+            new_value = param_type(new_value)
+        except (ValueError, TypeError):
+            raise SyntaxError(f"The value '{new_value}' of argument '{param_name}' is not of type '{param_type}'")
 
     convert_args[param_name] = new_value
 
