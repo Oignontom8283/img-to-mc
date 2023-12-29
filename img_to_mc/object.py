@@ -3,7 +3,7 @@ from typing_extensions import Literal
 
 from PIL import Image as PilImage
 
-_files_credits = 'This image generation function in minecraft was created with img-to-mc'
+_files_credits = 'This image generation function in minecraft was created with img-to-mc -> https://github.com/Oignontom8283/img-to-mc'
 
 class itm_Image():
 
@@ -76,7 +76,8 @@ class itm_Image():
 
             #DefaultImage.save('../debug.png')
 
-            Content_file = f'# {_files_credits}\n'
+            Content_file = f'# {_files_credits}\n' # Ajout des crédit de debut.
+
             Progress_counte = 0
             for x in range(format_largeur):
                 for y in range(format_hauteur):
@@ -98,7 +99,8 @@ class itm_Image():
                         Progress_counte = Progress_counte + 1
                         if progress_connect != None: progress_connect(x, y, color, Progress_counte, format_number_pixels)
 
-            Content_file = Content_file + f'# {_files_credits}\n'
+            Content_file = Content_file + f'# {_files_credits}\n' # Ajout des crédit de fin.
+
 
             if finish_connect != None: finish_connect(format_number_pixels)
 

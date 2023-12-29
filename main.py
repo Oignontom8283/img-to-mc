@@ -1,126 +1,30 @@
-import argparse, inspect
-from typing import Union, Callable
-from typing_extensions import Literal
+import os
 
+from args import command_line_arguments
 from img_to_mc import image, object
 
 
-
-program_description = ""
-
-
-#  =====================================
-#     Handling command line arguments   
-#  =====================================
-
-excluded_parameters = [ # the parameters to exclude from the list of parameters
-        'self',
+F = command_line_arguments(object.itm_Image.Convert, [
         'progress_connect',
         'finish_connect',
         'error_connect'
-    ]
-
-parser = argparse.ArgumentParser(description='') # init scripts settings
-
-signature = inspect.signature(object.itm_Image.Convert) # Recovery of parameters from the Convert function
-
-convert_param_list = signature.parameters.items()
-
-
-# put in a list all Convert parameters plus others except those excluded
-script_settings = {}
-for setting_name, settings in convert_param_list:
-
-    if setting_name not in excluded_parameters:
-
-        name    = setting_name
-        type    = settings.annotation
-        default = settings.default
-
-        script_settings[name] = (type, default)
-
-# add others parameter
-#script_settings["gui"] = (bool, False)
+    ],
+    {
+        'image_file': (str, command_line_arguments.OBLIGATORY),
+        'save_file': (str, command_line_arguments.OBLIGATORY)
+    }
+)
 
 
-# Define command ligne options
-for key, setting in script_settings.items():
-    
-    Name = key
+all_args = F.get_arguments()
+other_args = F.get_otherArgs()
+funct_args = F.get_functArgs()
 
-    parser.add_argument(f'--{Name}')
-
-
-
-#  ======================
-#       Test section    
-#  ======================
+image_file_path = other_args['image_file']
+save_file_path = other_args['save_file']
 
 
-# Obtenir les argument de ligne de command
-args = parser.parse_args()
-args = args._get_kwargs()
-
-
-# Traiter les argument
-convert_args = {}
-for param_name, value in args:
-
-    default_value = script_settings[param_name][1]
-    param_type = script_settings[param_name][0]
-
-    # Si il y a pas de valeur par default (donc obligatoire) et que l'argument n'est pas définie, lever l'erreur de param manquan
-    if default_value == inspect._empty and value == None:
-
-        raise ValueError(f"The argument '{param_name}' is mandatory")
-    else:
-        
-        if value == None and default_value != None: # Si la valeur n'est pas donner méttre celle par defaut
-            new_value = default_value
-        else:
-            new_value = value
-
-        # Gérer le cas des types Union
-        if hasattr(param_type, "__origin__") and param_type.__origin__ is Union: # Essayer chaque type de l'Union jusqu'à trouver celui qui convient
-            union_types = param_type.__args__
-
-            converted = False
-
-            for union_type in union_types:
-                try:
-                    new_value = union_type(new_value)
-                    converted = True
-                    break
-                except (ValueError, TypeError):
-                    pass
-            if not converted:
-                raise SyntaxError(f"The value '{type(new_value)}' of argument '{param_name}' does not match any type in the Union")
-
-        # Gérer le cas des types littéraux
-        elif hasattr(param_type, "__origin__") and param_type.__origin__ is Literal: # Vérifier que la valeur fait partie des littéraux autorisés
-
-            allowed_literals = param_type.__args__
-
-            if new_value not in allowed_literals:
-                raise SyntaxError(f"The value '{new_value}' of argument '{param_name}' is not a valid literal. Allowed literals are {allowed_literals}")
-            else:
-                pass
-
-        # Gérer les autres types
-        else:
-            try:
-                new_value = param_type(new_value)
-            except (ValueError, TypeError):
-                pass
-                #raise SyntaxError(f"The value '{new_value}' of argument '{param_name}' is not of type '{param_type}'")
-
-    convert_args[param_name] = new_value
-
-
-
-print(f'convert_args : {convert_args}')
-
-imaget = image.load_file('images/image2.jpg')
+imaget = image.load_file(image_file_path)
 
 def Convert_progress(x, y, color, progress, nomber_pixls):
     print(f'x:{str(x):4} y:{str(y):4} | {str(color):20} | {progress}/{str(nomber_pixls):5} = {progress/nomber_pixls*100} %')
@@ -131,7 +35,13 @@ def Convert_finish(number_pixels):
 def Convert_error(e):
     print(f'ERROR : {e}')
 
-image_formate = imaget.Convert(**convert_args ,progress_connect=Convert_progress, finish_connect=Convert_finish, error_connect=Convert_error)
+image_formate = imaget.Convert(**funct_args ,progress_connect=Convert_progress, finish_connect=Convert_finish, error_connect=Convert_error)
 
 
-print(image_formate.save('function.mcfunction'))
+save_success = image_formate.save(save_file_path)
+
+
+if os.path.exists(save_file_path) and os.path.getsize(save_file_path) > 0:
+    print(f"The process went well. The result was saved in {os.path.abspath(save_file_path)}")
+else:
+    print(f"An error has occurred. The {save_file_path} file was not saved or is empty.")
