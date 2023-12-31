@@ -45,7 +45,7 @@
     </div>
 
     <div class="mySlides" style="display: none;">
-        <img src="src/icon.png" style="width:100%">
+        <img src="https://raw.githubusercontent.com/Oignontom8283/img-to-mc/main/src/icon.ico" style="width:100%">
     </div>
 
     <!-- Ajoutez autant d'images que nécessaire -->
