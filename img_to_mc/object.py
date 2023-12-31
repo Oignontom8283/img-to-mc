@@ -16,7 +16,7 @@ class itm_Image():
             self.image = image_format
 
         except Exception as e:
-            raise TypeError(f'File is not conpatible | Error : {e}')
+            raise FileExistsError(f'File is not conpatible | Error : {e}')
 
     def Convert(self,
             image_width: Union[int, float],
