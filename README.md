@@ -41,11 +41,35 @@
 
 <div id="diaporama" style="max-width: 600px; position: relative; margin: auto;">
     <div class="mySlides" style="display: none;">
-        <img src="https://raw.githubusercontent.com/votre-utilisateur/votre-repo/main/image1.jpg" style="width:100%">
+        <img src="https://raw.githubusercontent.com/Oignontom8283/img-to-mc/main/Github/screenshots0.png" style="width:100%">
     </div>
 
     <div class="mySlides" style="display: none;">
-        <img src="https://raw.githubusercontent.com/Oignontom8283/img-to-mc/main/src/icon.ico" style="width:100%">
+        <img src="https://raw.githubusercontent.com/Oignontom8283/img-to-mc/main/Github/screenshots1.png" style="width:100%">
+    </div>
+
+    <div class="mySlides" style="display: none;">
+        <img src="https://raw.githubusercontent.com/Oignontom8283/img-to-mc/main/Github/screenshots2.png" style="width:100%">
+    </div>
+
+    <div class="mySlides" style="display: none;">
+        <img src="https://raw.githubusercontent.com/Oignontom8283/img-to-mc/main/Github/screenshots3.png" style="width:100%">
+    </div>
+
+    <div class="mySlides" style="display: none;">
+        <img src="https://raw.githubusercontent.com/Oignontom8283/img-to-mc/main/Github/screenshots4.png" style="width:100%">
+    </div>
+
+    <div class="mySlides" style="display: none;">
+        <img src="https://raw.githubusercontent.com/Oignontom8283/img-to-mc/main/Github/screenshots5.png" style="width:100%">
+    </div>
+
+    <div class="mySlides" style="display: none;">
+        <img src="https://raw.githubusercontent.com/Oignontom8283/img-to-mc/main/Github/screenshots6.png" style="width:100%">
+    </div>
+
+    <div class="mySlides" style="display: none;">
+        <img src="https://raw.githubusercontent.com/Oignontom8283/img-to-mc/main/Github/screenshots7.png" style="width:100%">
     </div>
 
     <!-- Ajoutez autant d'images que nécessaire -->
