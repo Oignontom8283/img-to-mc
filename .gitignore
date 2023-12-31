@@ -1,6 +1,6 @@
 .env/
-function.mcfunction
 debug.png
+launch.bat
+output/
 img_to_mc/__pycache__/
 __pycache__/
-launch.bat

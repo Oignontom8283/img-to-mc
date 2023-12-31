@@ -1,6 +1,9 @@
 import argparse, inspect
 from typing import Callable, Union
 
+import _config
+
+
 class command_line_arguments():
 
     OBLIGATORY = inspect.Parameter.empty
@@ -9,9 +12,12 @@ class command_line_arguments():
         self.otherParams = otherParams
         self.excludParams = excludParams
 
-        self.parser = argparse.ArgumentParser(usage='', description='')
+        self.parser = argparse.ArgumentParser( # Initialiser le modul pour les arguments en ligne de command
+            usage=_config.app_Usage_Text,
+            description=_config.app_description_Text
+        )
 
-        sign = inspect.signature(param_extract_func)
+        sign = inspect.signature(param_extract_func) # Récupérait les donner le fonction
         funcParam_paramList = sign.parameters.items()
 
 
@@ -56,12 +62,12 @@ class command_line_arguments():
             arg_defaultValue = self.script_settings[arg_name][1]
 
             # Traiter le type des argument
-            if arg_value == None  and  arg_defaultValue == inspect.Parameter.empty:
+            if arg_value == None  and  arg_defaultValue == command_line_arguments.OBLIGATORY:
                 raise ValueError(f"The argument '{arg_name}' is mandatory")
 
             else:
 
-                # Si la valeur na été donner par l'utilisateur métre la valeur par default
+                # Si la valeur na pas été donner par l'utilisateur métre la valeur par default
                 if arg_value == None  and  arg_defaultValue != None:
                     new_value = arg_defaultValue
                 
