@@ -31,10 +31,24 @@
 
 > The project requires [Python 3.6.3](https://www.python.org/downloads/release/python-363/) !
 
-| Packages                                                            | Version |
-|---------------------------------------------------------------------|---------|
-| Pillow [ⓘ](https://pypi.org/project/Pillow/)                       | 8.4.0   |
-| PyQt5 [ⓘ](https://pypi.org/project/PyQt5/)                         | 5.15.6  |
-| typing [ⓘ](https://pypi.org/project/typing/)                       | 3.7.4.3 |
-| typing_extensions [ⓘ](https://pypi.org/project/typing-extensions/) | 4.1.1   |
+| Packages                                                            | Version | Install command                                  |
+|---------------------------------------------------------------------|---------|--------------------------------------------------|
+| Pillow [ⓘ](https://pypi.org/project/Pillow/)                       | 8.4.0   | `python -m pip install Pillow==8.4.0`            |
+| PyQt5 [ⓘ](https://pypi.org/project/PyQt5/)                         | 5.15.6  | `python -m pip install PyQt5==5.15.6`            |
+| typing [ⓘ](https://pypi.org/project/typing/)                       | 3.7.4.3 | `python -m pip install typing==3.7.4.3`          |
+| typing_extensions [ⓘ](https://pypi.org/project/typing-extensions/) | 4.1.1   | `python -m pip install typing_extensions==4.1.1` |
 
+### Preview
+
+> Screenshots of the in-game result.
+
+![screenshots0](Github/screenshots0.png)
+![screenshots0](Github/screenshots1.png)
+![screenshots0](Github/screenshots2.png)
+![screenshots0](Github/screenshots3.png)
+![screenshots0](Github/screenshots4.png)
+![screenshots0](Github/screenshots5.png)
+![screenshots0](Github/screenshots6.png)
+![screenshots0](Github/screenshots7.png)
+
+View images to [folder](Github/)
