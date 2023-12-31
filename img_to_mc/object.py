@@ -1,3 +1,4 @@
+import os
 from typing import Union, Callable
 from typing_extensions import Literal
 
@@ -20,7 +21,7 @@ class itm_Image():
     def Convert(self,
             image_width: Union[int, float],
             image_height: Union[int, float],
-            particle_mod: Literal['force', 'normal'],
+            particle_mod: Literal['force', 'normal'] = 'normal',
             image_resolution: Union[int, float] = 50.0,
             particle_size: Union[int, float] = 1.0,
             particle_speed: Union[int, float] = 0.005,
@@ -123,13 +124,21 @@ class itm_ImgMinecraft():
         If the function was not executed correctly or if there were problems, it returns the error that occurred.
         """
 
+        directory = os.path.dirname(file_path)
+
+        # Si le répertoire n'existe pas, créez-le et tous les dossiers intermédiaires
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
         try:
+
+            # Enregistrée le fichier et son contenu.
             with open(file_path, 'w') as file:
                 file.write(self.content)
 
             return True
 
-        except IOError as e:
+        except Exception as e:
             return e
         
 
