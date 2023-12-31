@@ -21,7 +21,7 @@
 |-------------------|------------------|
 | Prototy           | Finish           |
 | Backend           | Finish           |
-| Use command line  | In progress      |
+| Use command line  | Finish           |
 | GUI               | Not started      |
 | Vidéo ?           | Food for thought |
 
