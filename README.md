@@ -45,12 +45,13 @@
 > Screenshots of the in-game result.
 
 ![screenshots0](Github/screenshots/screenshots0.png)
-![screenshots0](Github/screenshots/screenshots1.png)
-![screenshots0](Github/screenshots/screenshots2.png)
-![screenshots0](Github/screenshots/screenshots3.png)
-![screenshots0](Github/screenshots/screenshots4.png)
-![screenshots0](Github/screenshots/screenshots5.png)
-![screenshots0](Github/screenshots/screenshots6.png)
-![screenshots0](Github/screenshots/screenshots7.png)
+![screenshots1](Github/screenshots/screenshots1.png)
+![screenshots2](Github/screenshots/screenshots2.png)
+![screenshots3](Github/screenshots/screenshots3.png)
+![screenshots4](Github/screenshots/screenshots4.png)
+![screenshots5](Github/screenshots/screenshots5.png)
+![screenshots6](Github/screenshots/screenshots6.png)
+![screenshots7](Github/screenshots/screenshots7.png)
+![screenshots8](Github/screenshots/screenshots8.png)
 
 View images to [folder](Github/screenshots/)
