@@ -97,8 +97,8 @@ class itm_Image():
                         # append value to content
                         Content_file = Content_file + f'{particle_command} {particle_id} {red} {green} {blue} {particle_size} ^ ^{pixY} ^{pixX} {particle_axe_X} {particle_axe_Y} {particle_axe_Z} {particle_speed} {particle_count} {particle_mod} {particle_visibility_selector}\n'
 
-                        Progress_counte = Progress_counte + 1
-                        if progress_connect != None: progress_connect(x, y, color, Progress_counte, format_number_pixels)
+                    Progress_counte = Progress_counte + 1
+                    if progress_connect != None: progress_connect(x, y, color, Progress_counte, format_number_pixels)
 
             Content_file = Content_file + f'# {_files_credits}\n' # Ajout des crédit de fin.
 
